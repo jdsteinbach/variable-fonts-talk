@@ -323,12 +323,27 @@ body {
   }
 
   table {
-    th {
-      vertical-align: bottom;
+    &:not(:first-child) {
+      margin-top: 4rem;
     }
+
+    th {
+      --font-slnt: -10;
+      --font-crsv: 1;
+      --font-wght: 300;
+
+      font-size: 2.5rem;
+    }
+
     th,
     td {
+      --font-casl: 0;
+
       text-align: center;
+    }
+
+    td {
+      --font-mono: 1;
     }
   }
 

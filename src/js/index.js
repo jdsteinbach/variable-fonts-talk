@@ -6,10 +6,17 @@ initialize({
   progress: true,
   history: true,
   center: true,
-  width: 1800,
-  height: 1100,
+  width: 1600,
+  height: 1200,
   transition: 'fade'
 })
 
 
 initHighlightingOnLoad()
+
+document.querySelectorAll('a[href]').forEach(a => {
+  if (a.hostname.match(window.location.hostname) === null) {
+    a.setAttribute('rel', 'noopener')
+    a.setAttribute('target', '_blank')
+  }
+})

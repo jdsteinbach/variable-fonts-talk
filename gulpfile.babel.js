@@ -40,7 +40,7 @@ const PROD = !(yargs.argv.dev)
  * Set up file paths
  */
 const _srcDir = `./src`
-const _distDir = `./docs`
+const _distDir = `./dist`
 const _devDir = `./dev`
 const _buildDir = PROD ? _distDir : _devDir
 
@@ -248,9 +248,8 @@ task('content', () => {
   let content = dirToContent(`${_srcDir}/content/`)
 
   return src('./index.html')
-    .pipe(replace(/{{slides}}/, content))
-    .pipe(replace(/{{title}}/, title))
-    // .pipe(replace(/<li>/gi, '<li class="fragment">'))
+    .pipe(replace(/{{slides}}/gi, content))
+    .pipe(replace(/{{title}}/gi, title))
     .pipe(gulpif(PROD, replace(/style.css/, 'style.min.css')))
     .pipe(gulpif(PROD, replace(/index.js/, 'index.min.js')))
     .pipe(dest(_buildDir))

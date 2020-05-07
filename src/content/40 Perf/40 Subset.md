@@ -1,10 +1,13 @@
-### Real Data: IA Writer Quattro
+### Subset, IRL: [iA Writer Quattro](https://github.com/iaolo/iA-Fonts/tree/master/iA%20Writer%20Quattro)
 
-Regular, Bold, Italic, Bold Italic
+**WOFF2**: Regular, Bold, Italic, Bold Italic
 
-| Kind | Files | Size (kb) |
+| Full | Files | Size (kb) |
 |:---|---:|---:|
-| **Standard** | 4 | 168 |
-| **Variable** | 2 | 92 |
-| **Standard, Subset** | 4 | 46 |
-| **Variable, Subset** | 2 | 26 |
+| Static | 4 | 168 |
+| Variable | 2 | 92 |
+
+| Subset | Files | Size (kb) |
+|:---|---:|---:|
+| Static | 4 | 46 |
+| Variable | 2 | 26 |
