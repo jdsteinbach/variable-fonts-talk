@@ -1,0 +1,115 @@
+@keyframes wght {
+  0% {
+    font-variation-settings:
+      "MONO" var(--font-mono, 0),
+      "CASL" var(--font-casl, .6),
+      "wght" 300,
+      "slnt" var(--font-slnt, 0),
+      "CRSV" var(--font-crsv, 0);
+  }
+
+  100% {
+    font-variation-settings:
+      "MONO" var(--font-mono, 0),
+      "CASL" var(--font-casl, .6),
+      "wght" 900,
+      "slnt" var(--font-slnt, 0),
+      "CRSV" var(--font-crsv, 0);
+  }
+}
+
+@keyframes casl {
+  0% {
+    font-variation-settings:
+      "MONO" var(--font-mono, 0),
+      "CASL" 0,
+      "wght" var(--font-wght, #{$fontWeightLight}),
+      "slnt" var(--font-slnt, 0),
+      "CRSV" var(--font-crsv, 0);
+  }
+
+  100% {
+    font-variation-settings:
+      "MONO" var(--font-mono, 1),
+      "CASL" .6,
+      "wght" var(--font-wght, #{$fontWeightLight}),
+      "slnt" var(--font-slnt, 0),
+      "CRSV" var(--font-crsv, 0);
+  }
+}
+
+@keyframes slnt {
+  0% {
+    font-variation-settings:
+      "MONO" var(--font-mono, 0),
+      "CASL" var(--font-casl, .6),
+      "wght" var(--font-wght, #{$fontWeightLight}),
+      "slnt" 0,
+      "CRSV" var(--font-crsv, 0);
+  }
+
+  100% {
+    font-variation-settings:
+      "MONO" var(--font-mono, 1),
+      "CASL" var(--font-casl, .6),
+      "wght" var(--font-wght, #{$fontWeightLight}),
+      "slnt" -15,
+      "CRSV" var(--font-crsv, 0);
+  }
+}
+
+@keyframes title {
+  0% {
+    font-variation-settings:
+      "MONO" var(--font-mono, 1),
+      "CASL" var(--font-casl, .6),
+      "wght" 100,
+      "slnt" var(--font-slnt, 0),
+      "CRSV" var(--font-crsv, 0);
+  }
+
+  20% {
+    font-variation-settings:
+      "MONO" var(--font-mono, 1),
+      "CASL" var(--font-casl, .6),
+      "wght" 900,
+      "slnt" var(--font-slnt, 0),
+      "CRSV" var(--font-crsv, 0);
+  }
+
+  40% {
+    font-variation-settings:
+      "MONO" var(--font-mono, 1),
+      "CASL" 0,
+      "wght" var(--font-wght, #{$fontWeightLight}),
+      "slnt" var(--font-slnt, 0),
+      "CRSV" var(--font-crsv, 0);
+  }
+
+  60% {
+    font-variation-settings:
+      "MONO" var(--font-mono, 1),
+      "CASL" .6,
+      "wght" var(--font-wght, #{$fontWeightLight}),
+      "slnt" var(--font-slnt, 0),
+      "CRSV" var(--font-crsv, 0);
+  }
+
+  80% {
+    font-variation-settings:
+      "MONO" var(--font-mono, 1),
+      "CASL" var(--font-casl, .6),
+      "wght" var(--font-wght, #{$fontWeightLight}),
+      "slnt" 0,
+      "CRSV" var(--font-crsv, 0);
+  }
+
+  100% {
+    font-variation-settings:
+      "MONO" var(--font-mono, 1),
+      "CASL" var(--font-casl, .6),
+      "wght" var(--font-wght, #{$fontWeightLight}),
+      "slnt" -15,
+      "CRSV" var(--font-crsv, 0);
+  }
+}
