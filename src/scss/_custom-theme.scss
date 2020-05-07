@@ -184,7 +184,6 @@ body {
     }
   }
 
-
   p,
   li {
     --font-wght: #{$fontWeightLight};
@@ -224,7 +223,14 @@ body {
   }
 
   a {
+    --font-crsv: 0;
+
     text-decoration: underline;
+    transition: color .2s, font-variation-settings .25s ease-in-out;
+
+    &:hover {
+      --font-slnt: -10;
+    }
   }
 
   blockquote {
@@ -236,6 +242,10 @@ body {
     font-size: $heading1Size;
     text-shadow: .5px .5px 0 $shadowColor,
                  1px 1px 0 $shadowColor;
+  }
+
+  em {
+    font-style: normal;
   }
 
   .big-p {
