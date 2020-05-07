@@ -27,6 +27,13 @@ along specified axes.</p>
 <p>CSS-standardized axes are weight, slant, italic, width, and optical size.</p>
 <p>Font designers can create<br>
 any custom axis they want.</p>
+</section><section ><h3>Examples</h3>
+<ul>
+<li><a href="https://www.recursive.design/">Recursive</a></li>
+<li><a href="https://rsms.me/inter/#variable">Inter</a></li>
+<li><a href="https://v-fonts.com/fonts/amstelvar">Amstelvar</a></li>
+<li><a href="https://v-fonts.com/fonts/zycon">Zycon</a></li>
+</ul>
 </section><section ><h3>Where to Find Variable Fonts</h3>
 <ul>
 <li><a href="https://v-fonts.com/">v-fonts.com</a></li>
@@ -35,16 +42,9 @@ any custom axis they want.</p>
 <li><a href="https://fonts.google.com/?vfonly">Google Fonts</a></li>
 <li><a href="https://www.myfonts.com/search/tag%3AVariable/fonts/">MyFonts</a></li>
 </ul>
-</section><section ><h3>Examples</h3>
-<ul>
-<li><a href="https://www.recursive.design/">Recursive</a></li>
-<li><a href="https://rsms.me/inter/#variable">Inter</a></li>
-<li><a href="https://v-fonts.com/fonts/amstelvar">Amstelvar</a></li>
-<li><a href="https://v-fonts.com/fonts/zycon">Zycon</a></li>
-</ul>
 </section></section><section ><section ><h2>Using Variable Fonts in CSS</h2>
 </section><section ><h3><code>@font-face</code></h3>
-</section><section ><h4>Non-Variable <code>@font-face</code> (Current)</h4>
+</section><section ><h4>Static <code>@font-face</code> (Current)</h4>
 <pre><code class="language-css">@font-face {
   font-family: Normal Font;
   src: url(&quot;/fonts/normal.woff2&quot;) format(&quot;woff2&quot;);
@@ -76,50 +76,47 @@ any custom axis they want.</p>
   }
 }
 </code></pre>
-</section><section ><h3><code>font-feature-settings</code></h3>
-</section><section ><pre><code class="language-css">.bold {
-  font-synthesis: none;
+</section><section ><h3><code>font-variation-settings</code></h3>
+</section><section ><pre><code class="language-css">.text--bold {
   font-weight: bold;
 }
 
 @supports (font-variation-settings: normal) {
-  .bold {
+  .text--bold {
     font-variation-settings: &quot;wght&quot; 680;
     font-weight: 680;
   }
 }
 </code></pre>
-</section><section ><pre><code class="language-css">.slanted {
-  font-synthesis: none;
+</section><section ><pre><code class="language-css">.text--slanted {
   font-style: italic;
 }
 
 @supports (font-variation-settings: normal) {
-  .slanted {
+  .text--slanted {
     font-variation-settings: &quot;slnt&quot; 10;
     font-style: oblique 10deg;
   }
 }
 </code></pre>
-</section><section ><pre><code class="language-css">.italic {
-  font-synthesis: none;
+</section><section ><pre><code class="language-css">.text--italic {
   font-style: italic;
 }
 
 @supports (font-variation-settings: normal) {
-  .italic {
+  .text--italic {
     font-variation-settings: &quot;ital&quot; 1;
   }
 }
 </code></pre>
-</section><section ><pre><code class="language-css">.wide {
+</section><section ><pre><code class="language-css">.text--wide {
   font-variation-settings: &quot;wdth&quot; 120;
   font-stretch: 120%;
 }
 </code></pre>
-</section><section ><pre><code class="language-css">.display {
+</section><section ><pre><code class="language-css">.text--display {
   font-variation-settings: &quot;opsz&quot; 100;
-  font-optical-sizing: 100
+  font-optical-sizing: 100;
 }
 </code></pre>
 </section><section ><h3>Custom Properties</h3>
@@ -137,26 +134,34 @@ any custom axis they want.</p>
   --vf-wght: 820;
 }
 </code></pre>
+<pre><code class="language-css">.text--slanted {
+  --vf-slnt: -10;
+}
+</code></pre>
+<pre><code class="language-css">.text--wide {
+  --vf-wdth: 150;
+}
+</code></pre>
 </section><section ><h3>Individual Properties</h3>
-</section><section ><pre><code class="language-css">.bold {
+</section><section ><pre><code class="language-css">.text--bold {
   font-weight: 700; /* Fallback for normal fonts */
   font-weight: 625;
 }
-.slanted {
+.text--slanted {
   font-style: oblique 10deg;
 }
-.italic {
+.text--italic {
   font-style: italic;
 }
-.wide {
+.text--wide {
   font-stretch: 150%;
 }
-.optical-size {
+.text--display {
   font-optical-sizing: 50;
 }
 </code></pre>
 </section><section ><h3>But Custom Axes</h3>
-</section><section ><pre><code class="language-css">.v-font--recursive {
+</section><section ><pre><code class="language-css">.text--recursive {
   font-variation-settings:
     &quot;wght&quot; var(--vf-wght, 400),
     &quot;slnt&quot; var(--vf-slnt, 0),
@@ -165,7 +170,7 @@ any custom axis they want.</p>
     &quot;CASL&quot; var(--vf-casl, .6);
 }
 </code></pre>
-</section><section ><pre><code class="language-css">.v-font--amstelvar {
+</section><section ><pre><code class="language-css">.text--amstelvar {
   /* &quot;flat capitals&quot; - same height as lowercase x-height */
   font-variation-settings:
     &quot;YTUC&quot; 650, /* Reduce uppercase height */
@@ -177,26 +182,37 @@ any custom axis they want.</p>
 <p>Supported in all modern browsers;<br>
 fallbacks for IE11 as necessary.</p>
 </section><section ><h4>Use both values</h4>
-<pre><code class="language-css">.bold {
+<pre><code class="language-css">.text--bold {
   font-weight: bold;
   font-weight: 655;
 }
 </code></pre>
 <hr>
-<pre><code class="language-css">.bold {
+<pre><code class="language-css">.text--bold {
   font-weight: bold;
   font-variation-settings: &quot;wght&quot; 655;
 }
 </code></pre>
 </section><section ><h4><code>@supports</code></h4>
-<pre><code class="language-css">.italics {
+<pre><code class="language-css">.text {
+  font-family: Normal Font, sans-serif;
+}
+
+@supports (font-variation-settings: normal) {
+  .text {
+    font-family: Variable Font, sans-serif;
+  }
+}
+</code></pre>
+</section><section ><h4><code>@supports</code></h4>
+<pre><code class="language-css">.text--italics {
   font-style: italic;
 }
 
 @supports (font-variation-settings: normal) {
-  .italics {
+  .text--italics {
     font-style: oblique 10deg;
-   }
+  }
 }
 </code></pre>
 </section><section ><h3>Prevent “faux-bold” <br>&amp; “faux-italic”</h3>
@@ -227,18 +243,13 @@ Italic, Light Italic, Bold Italic</p>
 </tr>
 </tbody>
 </table>
-</section><section ><h3>Subset</h3>
-<ul>
-<li>Always use <code>woff2</code></li>
-<li><a href="https://github.com/filamentgroup/glyphhanger">glyphhanger</a></li>
-<li><a href="https://github.com/behdad/fonttools"><code>pyftsubset</code></a></li>
-</ul>
-</section><section ><h3>Subset, IRL: <a href="https://github.com/iaolo/iA-Fonts/tree/master/iA%20Writer%20Quattro">iA Writer Quattro</a></h3>
+</section><section ><h3>File Size</h3>
+<p><a href="https://github.com/iaolo/iA-Fonts/tree/master/iA%20Writer%20Quattro">iA Writer Quattro</a></p>
 <p><strong>WOFF2</strong>: Regular, Bold, Italic, Bold Italic</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Full</th>
+<th style="text-align:left">Format</th>
 <th style="text-align:right">Files</th>
 <th style="text-align:right">Size (kb)</th>
 </tr>
@@ -256,22 +267,41 @@ Italic, Light Italic, Bold Italic</p>
 </tr>
 </tbody>
 </table>
+</section><section ><h3>Subset</h3>
+<ul>
+<li>Always use <code>woff2</code></li>
+<li><a href="https://github.com/filamentgroup/glyphhanger">glyphhanger</a></li>
+<li><a href="https://github.com/behdad/fonttools"><code>pyftsubset</code></a></li>
+</ul>
+</section><section ><h3>Subset, IRL</h3>
+<p><a href="https://github.com/iaolo/iA-Fonts/tree/master/iA%20Writer%20Quattro">iA Writer Quattro</a></p>
+<p><strong>WOFF2</strong>: Regular, Bold, Italic, Bold Italic</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Subset</th>
+<th style="text-align:left">Format</th>
 <th style="text-align:right">Files</th>
 <th style="text-align:right">Size (kb)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">Static</td>
+<td style="text-align:left">Static (Full)</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">168</td>
+</tr>
+<tr>
+<td style="text-align:left">Variable (Full)</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">92</td>
+</tr>
+<tr>
+<td style="text-align:left">Static (EN)</td>
 <td style="text-align:right">4</td>
 <td style="text-align:right">46</td>
 </tr>
 <tr>
-<td style="text-align:left">Variable</td>
+<td style="text-align:left">Variable (EN)</td>
 <td style="text-align:right">2</td>
 <td style="text-align:right">26</td>
 </tr>
@@ -300,10 +330,10 @@ glyphhanger --subset=*.ttf --US_ASCII --formats=woff2
 <li><a href="https://blog.typekit.com/2016/09/14/variable-fonts-a-new-kind-of-font-for-flexible-design/">Variable Fonts for Flexible Design</a></li>
 <li><a href="https://thetrevorharmon.com/blog/how-to-prepare-and-use-variable-fonts-on-the-web">Prepare &amp; Use Variable Fonts</a></li>
 </ul>
-</section><section ><h2 class="big v-tilt v-tilt--large" data-autoslide="0">
-  <span class="fragment d-block a-blast-in" data-autoslide="500">Thanks,</span>
-  <em class="fragment d-block a-blast-in a-blast-in--big" data-autoslide="500">Y’all!</em>
-  <span class="fragment d-block a-blast-in">👍 </span>
+</section><section ><h2>
+  <span>Thanks,</span>
+  <em>Y’all!</em>
+  <span>👍 </span>
 </h2>
 </section><section ><h2 class="mb-1 t-bold">James Steinbach</h2>
 <h3>Senior UX Developer<br /> at <a rel="noreferrer noopener nofollow" target="_blank" href="https://dockyard.com/blog/authors/james-steinbach">DockYard</a><svg viewBox="0 0 1023 1024" class="logo--dockyard" fill="#fff"><path d="M511.413 0c-282.422 0-511.413 228.991-511.413 512 0 282.422 228.991 511.413 511.413 511.413s511.413-228.991 511.413-511.413c0.587-283.009-228.404-512-511.413-512zM808.514 202.569c0 1.761-1.761 4.697-5.284 8.807-9.394 10.569-110.972 123.89-148.55 162.642 16.44 42.275 16.44 115.083 10.569 185.541-8.22 99.229-21.138 139.156-75.156 169.688s-201.982 34.642-275.963 16.44c-73.982-18.202-83.376-92.183-90.422-95.119-28.771-12.33-25.248-58.128-25.248-58.128 20.55-1.174 40.514 24.073 40.514 24.073 8.22-12.917 32.294-25.248 32.294-25.248 11.156 39.339-12.33 52.844-9.982 58.128 5.872 14.679 37.578 49.908 87.486 24.073 49.908-25.248 51.67-94.532 54.606-179.67s25.248-153.248 98.642-169.688c56.367-12.33 96.881 1.761 115.083 10.569 50.495-36.991 165.578-119.193 175.56-126.239 4.697-2.936 8.22-5.284 10.569-6.459h5.284c0 0 0 0 0 0.587v0z"></path><path d="M473.835 577.174c-16.44 22.899-21.138 44.037-31.706 69.284-8.807 19.963-23.486 29.358-34.642 45.798-9.394 14.092 20.55 18.789 28.771 19.376 21.725.587 45.798-10.569 58.716-27.596 17.615-24.073 19.376-46.972 31.706-72.22 6.459-13.505 26.422-39.339 27.596-51.67 2.936-23.486-56.367-16.44-80.44 17.028zM532.55 392.807c-11.743 4.11-18.202 16.44-14.092 28.183 3.523 11.743 16.44 18.202 27.596 14.092 11.743-4.11 18.202-16.44 14.092-28.183-3.523-11.156-16.44-17.615-27.596-14.092z"></path></svg></h3>
