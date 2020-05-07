@@ -1,0 +1,329 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Getting Started with Variable Fonts</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./style.min.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section ><section ><h1 class="title"><span>Getting Started</span><br />with <br /><span>Variable Fonts</span></h1>
+</section></section><section ><section ><h2>How Variable Fonts Work</h2>
+</section><section ><h3>What’s in a Font File?</h3>
+<p><strong>Glyphs</strong></p>
+<p>A collection of vector shapes,<br>
+each mapped to a unicode identifier</p>
+</section><section ><h3>What’s in a <br />Variable Font File?</h3>
+<p><strong>Glyphs, Leveled Up</strong></p>
+<p>Not just one shape per unicode point,<br>
+instructions for morphing the shape<br>
+along specified axes.</p>
+</section><section ><h3>What Axes Do <br>Variable Fonts Use?</h3>
+<p><strong>It depends…</strong></p>
+<p>CSS-standardized axes are weight, slant, italic, width, and optical size.</p>
+<p>Font designers can create<br>
+any custom axis they want.</p>
+</section><section ><h3>Where to Find Variable Fonts</h3>
+<ul>
+<li><a href="https://v-fonts.com/">v-fonts.com</a></li>
+<li><a href="https://www.axis-praxis.org/">axis-praxis.org</a></li>
+<li><a href="https://www.variable-fonts.com">Fontsmith</a></li>
+<li><a href="https://fonts.google.com/?vfonly">Google Fonts</a></li>
+<li><a href="https://www.myfonts.com/search/tag%3AVariable/fonts/">MyFonts</a></li>
+</ul>
+</section><section ><h3>Examples</h3>
+<ul>
+<li><a href="https://www.recursive.design/">Recursive</a></li>
+<li><a href="https://rsms.me/inter/#variable">Inter</a></li>
+<li><a href="https://v-fonts.com/fonts/amstelvar">Amstelvar</a></li>
+<li><a href="https://v-fonts.com/fonts/zycon">Zycon</a></li>
+</ul>
+</section></section><section ><section ><h2>Using Variable Fonts in CSS</h2>
+</section><section ><h3><code>@font-face</code></h3>
+</section><section ><h4>Non-Variable <code>@font-face</code> (Current)</h4>
+<pre><code class="language-css">@font-face {
+  font-family: Normal Font;
+  src: url(&quot;/fonts/normal.woff2&quot;) format(&quot;woff2&quot;);
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+</code></pre>
+</section><section ><h4>Variable <code>@font-face</code> (New)</h4>
+<pre><code class="language-css">@font-face {
+  font-family: Variable Font;
+  src:
+    url(&quot;/fonts/variable.woff2&quot;) format(&quot;woff2 supports variations&quot;),
+    url(&quot;/fonts/variable.woff2&quot;) format(&quot;woff2-variations&quot;);
+  font-style: oblique 0deg 10deg;
+  font-stretch: 50% 150%;
+  font-weight: 100 900;
+  font-display: swap;
+}
+</code></pre>
+</section><section ><h3><code>font-family</code></h3>
+</section><section ><pre><code class="language-css">.text {
+  font-family: Normal Font, sans-serif;
+}
+
+@supports (font-variation-settings) {
+  .text {
+    font-family: Variable Font, sans-serif;
+  }
+}
+</code></pre>
+</section><section ><h3><code>font-feature-settings</code></h3>
+</section><section ><pre><code class="language-css">.bold {
+  font-synthesis: none;
+  font-weight: bold;
+}
+
+@supports (font-variation-settings: normal) {
+  .bold {
+    font-variation-settings: &quot;wght&quot; 680;
+    font-weight: 680;
+  }
+}
+</code></pre>
+</section><section ><pre><code class="language-css">.slanted {
+  font-synthesis: none;
+  font-style: italic;
+}
+
+@supports (font-variation-settings: normal) {
+  .slanted {
+    font-variation-settings: &quot;slnt&quot; 10;
+    font-style: oblique 10deg;
+  }
+}
+</code></pre>
+</section><section ><pre><code class="language-css">.italic {
+  font-synthesis: none;
+  font-style: italic;
+}
+
+@supports (font-variation-settings: normal) {
+  .italic {
+    font-variation-settings: &quot;ital&quot; 1;
+  }
+}
+</code></pre>
+</section><section ><pre><code class="language-css">.wide {
+  font-variation-settings: &quot;wdth&quot; 120;
+  font-stretch: 120%;
+}
+</code></pre>
+</section><section ><pre><code class="language-css">.display {
+  font-variation-settings: &quot;opsz&quot; 100;
+  font-optical-sizing: 100
+}
+</code></pre>
+</section><section ><h3>Custom Properties</h3>
+</section><section ><pre><code class="language-css">.text {
+  font-variation-settings:
+    &quot;wght&quot; var(--vf-wght, 400),
+    &quot;slnt&quot; var(--vf-slnt, 0),
+    &quot;ital&quot; var(--vf-ital, 0),
+    &quot;wdth&quot; var(--vf-wdth, 100),
+    &quot;opsz&quot; var(--vf-opsz, auto);
+}
+</code></pre>
+<hr>
+<pre><code class="language-css">.text--heavy {
+  --vf-wght: 820;
+}
+</code></pre>
+</section><section ><h3>Individual Properties</h3>
+</section><section ><pre><code class="language-css">.bold {
+  font-weight: 700; /* Fallback for normal fonts */
+  font-weight: 625;
+}
+.slanted {
+  font-style: oblique 10deg;
+}
+.italic {
+  font-style: italic;
+}
+.wide {
+  font-stretch: 150%;
+}
+.optical-size {
+  font-optical-sizing: 50;
+}
+</code></pre>
+</section><section ><h3>But Custom Axes</h3>
+</section><section ><pre><code class="language-css">.v-font--recursive {
+  font-variation-settings:
+    &quot;wght&quot; var(--vf-wght, 400),
+    &quot;slnt&quot; var(--vf-slnt, 0),
+    &quot;CRSV&quot; var(--vf-crsv, .5),
+    &quot;MONO&quot; var(--vf-mono, 0),
+    &quot;CASL&quot; var(--vf-casl, .6);
+}
+</code></pre>
+</section><section ><pre><code class="language-css">.v-font--amstelvar {
+  /* &quot;flat capitals&quot; - same height as lowercase x-height */
+  font-variation-settings:
+    &quot;YTUC&quot; 650, /* Reduce uppercase height */
+    &quot;YTLC&quot; 580; /* Increase lowercase x-height */
+}
+</code></pre>
+<p><img src="images/flat-caps.jpg" alt="Flat Caps Demo"></p>
+</section><section ><h3>Fallbacks?</h3>
+<p>Supported in all modern browsers;<br>
+fallbacks for IE11 as necessary.</p>
+</section><section ><h4>Use both values</h4>
+<pre><code class="language-css">.bold {
+  font-weight: bold;
+  font-weight: 655;
+}
+</code></pre>
+<hr>
+<pre><code class="language-css">.bold {
+  font-weight: bold;
+  font-variation-settings: &quot;wght&quot; 655;
+}
+</code></pre>
+</section><section ><h4><code>@supports</code></h4>
+<pre><code class="language-css">.italics {
+  font-style: italic;
+}
+
+@supports (font-variation-settings: normal) {
+  .italics {
+    font-style: oblique 10deg;
+   }
+}
+</code></pre>
+</section><section ><h3>Prevent “faux-bold” <br>&amp; “faux-italic”</h3>
+<p>Use <code>font-synthesis: none</code> if browsers are creating faux bold/italic on your text.</p>
+</section></section><section ><section ><h2>Performance</h2>
+</section><section ><h3>Fewer Requests</h3>
+<p>Regular, Light, Bold,<br>
+Italic, Light Italic, Bold Italic</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Format</th>
+<th style="text-align:right">Requests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Static</td>
+<td style="text-align:right">6</td>
+</tr>
+<tr>
+<td style="text-align:left">Variable, Included Italic</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:left">Variable, Separate Italic</td>
+<td style="text-align:right">2</td>
+</tr>
+</tbody>
+</table>
+</section><section ><h3>Subset</h3>
+<ul>
+<li>Always use <code>woff2</code></li>
+<li><a href="https://github.com/filamentgroup/glyphhanger">glyphhanger</a></li>
+<li><a href="https://github.com/behdad/fonttools"><code>pyftsubset</code></a></li>
+</ul>
+</section><section ><h3>Subset, IRL: <a href="https://github.com/iaolo/iA-Fonts/tree/master/iA%20Writer%20Quattro">iA Writer Quattro</a></h3>
+<p><strong>WOFF2</strong>: Regular, Bold, Italic, Bold Italic</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Full</th>
+<th style="text-align:right">Files</th>
+<th style="text-align:right">Size (kb)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Static</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">168</td>
+</tr>
+<tr>
+<td style="text-align:left">Variable</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">92</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Subset</th>
+<th style="text-align:right">Files</th>
+<th style="text-align:right">Size (kb)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Static</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">46</td>
+</tr>
+<tr>
+<td style="text-align:left">Variable</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">26</td>
+</tr>
+</tbody>
+</table>
+</section><section ><pre><code class="language-sh">pip install fonttools
+pip install Brotli
+
+npm i -g glyphhanger
+
+glyphhanger --subset=*.ttf --US_ASCII --formats=woff2
+</code></pre>
+</section><section ><pre><code class="language-sh">pyftsubset iAWriterQuattroV.ttf \
+  --glyphs=&quot;*&quot; \
+  --layout-features=&quot;*&quot; \
+  --flavor=woff2
+</code></pre>
+</section></section><section ><section ><h2>Resources</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide">MDN Variable Fonts Guide</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/design-and-ux/typography/variable-fonts/">Google Web Fundamentals</a></li>
+<li><a href="https://variablefonts.io/">variablefonts.io</a></li>
+<li><a href="http://clagnut.com/blog/2390">Variable Fonts in the Real World</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/design-and-ux/typography/variable-fonts">Intro to Variable Fonts</a></li>
+<li><a href="https://uxdesign.cc/the-performance-benefits-of-variable-fonts-79af8c4ff56c">Performance of Variable Fonts</a></li>
+<li><a href="https://blog.typekit.com/2016/09/14/variable-fonts-a-new-kind-of-font-for-flexible-design/">Variable Fonts for Flexible Design</a></li>
+<li><a href="https://thetrevorharmon.com/blog/how-to-prepare-and-use-variable-fonts-on-the-web">Prepare &amp; Use Variable Fonts</a></li>
+</ul>
+</section><section ><h2 class="big v-tilt v-tilt--large" data-autoslide="0">
+  <span class="fragment d-block a-blast-in" data-autoslide="500">Thanks,</span>
+  <em class="fragment d-block a-blast-in a-blast-in--big" data-autoslide="500">Y’all!</em>
+  <span class="fragment d-block a-blast-in">👍 </span>
+</h2>
+</section><section ><h2 class="mb-1 t-bold">James Steinbach</h2>
+<h3>Senior UX Developer<br /> at <a rel="noreferrer noopener nofollow" target="_blank" href="https://dockyard.com/blog/authors/james-steinbach">DockYard</a><svg viewBox="0 0 1023 1024" class="logo--dockyard" fill="#fff"><path d="M511.413 0c-282.422 0-511.413 228.991-511.413 512 0 282.422 228.991 511.413 511.413 511.413s511.413-228.991 511.413-511.413c0.587-283.009-228.404-512-511.413-512zM808.514 202.569c0 1.761-1.761 4.697-5.284 8.807-9.394 10.569-110.972 123.89-148.55 162.642 16.44 42.275 16.44 115.083 10.569 185.541-8.22 99.229-21.138 139.156-75.156 169.688s-201.982 34.642-275.963 16.44c-73.982-18.202-83.376-92.183-90.422-95.119-28.771-12.33-25.248-58.128-25.248-58.128 20.55-1.174 40.514 24.073 40.514 24.073 8.22-12.917 32.294-25.248 32.294-25.248 11.156 39.339-12.33 52.844-9.982 58.128 5.872 14.679 37.578 49.908 87.486 24.073 49.908-25.248 51.67-94.532 54.606-179.67s25.248-153.248 98.642-169.688c56.367-12.33 96.881 1.761 115.083 10.569 50.495-36.991 165.578-119.193 175.56-126.239 4.697-2.936 8.22-5.284 10.569-6.459h5.284c0 0 0 0 0 0.587v0z"></path><path d="M473.835 577.174c-16.44 22.899-21.138 44.037-31.706 69.284-8.807 19.963-23.486 29.358-34.642 45.798-9.394 14.092 20.55 18.789 28.771 19.376 21.725.587 45.798-10.569 58.716-27.596 17.615-24.073 19.376-46.972 31.706-72.22 6.459-13.505 26.422-39.339 27.596-51.67 2.936-23.486-56.367-16.44-80.44 17.028zM532.55 392.807c-11.743 4.11-18.202 16.44-14.092 28.183 3.523 11.743 16.44 18.202 27.596 14.092 11.743-4.11 18.202-16.44 14.092-28.183-3.523-11.156-16.44-17.615-27.596-14.092z"></path></svg></h3>
+<h2 class="mb-1"><code>jdsteinbach</code></h2>
+<h3><a rel="noreferrer noopener nofollow" target="_blank" href="https://twitter.com/jdsteinbach">Twitter</a> | <a rel="noreferrer noopener nofollow" target="_blank" href="https://github.com/jdsteinbach">Github</a> | <a href="https://jdsteinbach.com">Blog</a></h3>
+</section></section>
+      </div>
+
+      <div class="colophon">
+        <svg class="colophon__logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 -200 3848 1800">
+          <g fill-rule="evenodd">
+            <path fill="#60569C" d="M1735.64 0L507.27 1750.66h174.1L1803.34 154.74h19.35l1121.96 1595.93h174.1L1890.36 0h-154.72z"></path>
+            <path fill="#60569C" d="M1881.3 947.64L2209.45 441H2034.9L1817 788.83h-5.25l-217.88-347.8H1419.3l328.14 506.63h133.87z"></path>
+            <path fill="#5C6443" d="M2753.76 467.26l-947.5 1361.57h179.06l835.6-1201.16h14.9l835.6 1201.16h179.06l-947.5-1361.57h-149.22z"></path>
+            <path fill="#2C313E" d="M600.2 925.04L41.05 1749.4h174.6l448.62-665.22h8.83l448.66 665.2h174.57L737.2 925.05h-137z"></path>
+          </g>
+        </svg>
+        <a class="colophon__link" href="https://jdsteinbach.com/variable-fonts-talk/">jds.li/vfonts</a>
+      </div>
+    </div>
+    <script type="text/javascript" src="./index.min.js"></script>
+  </body>
+</html>
