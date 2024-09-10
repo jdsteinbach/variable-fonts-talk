@@ -40,7 +40,7 @@ $fontWeightLight: 400;
 $fontWeightNormal: 550;
 $fontWeightBold: 800;
 
-$blockMargin: $mainFontSize / 1.5;
+$blockMargin: math.div($mainFontSize, 1.5);
 $headingMargin: 0 0 $blockMargin;
 
 $accentColor: mix($headingColor, $mainColor, 45%);
@@ -72,18 +72,18 @@ body {
 }
 
 .reveal section {
-  // OVERLAY FIX
-  &[aria-hidden="true"],
-  &[aria-hidden="true"] * {
-    pointer-events: none !important;
-  }
-
   --font-wght: #{$fontWeightLight};
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: antialiased;
   font-feature-settings: liga frac ordn;
   hyphens: none;
+
+  // OVERLAY FIX
+  &[aria-hidden="true"],
+  &[aria-hidden="true"] * {
+    pointer-events: none !important;
+  }
 
   h1,
   h2,

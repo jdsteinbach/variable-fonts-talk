@@ -5,7 +5,8 @@ import fm from 'front-matter'
 import { readdirSync, readFileSync, statSync } from 'fs'
 import glob from 'glob'
 import { join, basename, extname } from 'path'
-import webpack from 'webpack-stream'
+import gulpWebpack from 'webpack-stream'
+import webpack from 'webpack'
 import gulpif from 'gulp-if'
 import imagemin from 'gulp-imagemin'
 import standard from 'gulp-standard'
@@ -13,12 +14,16 @@ import notify from 'gulp-notify'
 import plumber from 'gulp-plumber'
 import rename from 'gulp-rename'
 import replace from 'gulp-replace'
-import sass from 'gulp-sass'
+import gulpSass from 'gulp-sass'
+import dartSass from 'sass'
 import sassLint from 'gulp-sass-lint'
 import postcss from 'gulp-postcss'
 import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
 import sorter from 'css-declaration-sorter'
+
+const sass = gulpSass(dartSass)
+
 
 let browserSync = require('browser-sync').create()
 let { reload } = browserSync
@@ -123,7 +128,7 @@ task('standard', series('standard:gulpfile', 'standard:js', cb => cb()))
 task('scripts', () => {
   return src(`${_srcDir}/js/index.js`)
     .pipe(plumber({ errorHandler: errorAlert }))
-    .pipe(webpack({
+    .pipe(gulpWebpack({
       entry: `${_srcDir}/js/index.js`,
       output: {
         filename: `index.js`
@@ -146,7 +151,7 @@ task('scripts', () => {
       performance: {
         hints: false
      }
-    }))
+    }, webpack))
     .pipe(gulpif(PROD, rename({ suffix: '.min' })))
     .pipe(dest(_buildDir))
     .pipe(reload({ stream: true }))
